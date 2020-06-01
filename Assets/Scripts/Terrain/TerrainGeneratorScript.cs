@@ -10,16 +10,22 @@ public class TerrainGeneratorScript : MonoBehaviour
 
     public Tilemap basicTileMap;        // zakladny tile map, všade len trava
     public Tilemap frontLayerTileMap;   //popredný tile map, na nom sa budu ukladať budovy stromy atd..
-
+    public Tilemap lockedTileMap;
 
     public TileBase basic;              //tile pre basic tile map
-    public TileBase newTile;
+    public TileBase newTile;        //test use only
+
+    public TileBase lockedTile;
+    
+
+    public TileBase[] tiles;
         
     private Vector3 pos;
     private Vector3Int tilePos;
     private bool shouldDo;
 
-
+    int size = 100;
+    int halfSize = 50;
     
 
     void Start()
@@ -37,14 +43,35 @@ public class TerrainGeneratorScript : MonoBehaviour
 
     private void ClickAndShow()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))    //left click
         {
             pos = Input.mousePosition;
             tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-            Debug.Log("Position of tile " + tilePos.ToString());
+            //Debug.Log("Position of tile " + tilePos.ToString());
 
-            frontLayerTileMap.SetTile(tilePos, newTile);
+            //frontLayerTileMap.SetTile(tilePos, newTile);
+            lockedTileMap.SetTile(tilePos, null);
+            
+        }if (Input.GetMouseButtonDown(1))   //right click
+        {
+            pos = Input.mousePosition;
+            tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
+            //Debug.Log("Position of tile " + tilePos.ToString());
 
+            //frontLayerTileMap.SetTile(tilePos, newTile);
+            
+            TileBase selectedTile = lockedTileMap.GetTile(tilePos);
+            if (selectedTile == null)
+            {
+                if (frontLayerTileMap.GetTile(tilePos) == null)
+                    frontLayerTileMap.SetTile(tilePos, newTile);
+                else
+                    Debug.Log("This tile is not empty");
+            } else
+            {
+                Debug.Log("Tile is locked");
+            }
+            
         }
     }
 
@@ -74,15 +101,63 @@ public class TerrainGeneratorScript : MonoBehaviour
 
     void GenerateBasicTileMap()
     {
-        for (int riadok = -100; riadok < 100; riadok++)
+        for (int row = 0; row < size; row++)
         {
-            for (int stlpec = -100;  stlpec < 100;  stlpec++)
+            for (int column = 0;  column < size;  column++)
             {
                 
-                tilePos = new Vector3Int(riadok , stlpec , 0);
-                basicTileMap.SetTile(tilePos, basic);
+                tilePos = new Vector3Int(row - halfSize, column - halfSize, 0);
+                basicTileMap.SetTile(tilePos, TestGen(row - halfSize, column - halfSize));
+                lockedTileMap.SetTile(tilePos, lockedTile);
             }
         }
+
+        frontLayerTileMap.SetTile(Vector3Int.zero, newTile);
+    }
+
+    private TileBase TestGen(int x, int y)
+    {
+        float xCoord = (float)x / size;
+        float yCoord = (float)y / size;
+
+        float sample = Mathf.PerlinNoise(xCoord, yCoord);
+        //Debug.Log(sample);
+        return ChooseTile(sample);
+    }
+
+    // vrati tile podla zadaneho cisla --> cierna magia
+    private TileBase ChooseTile(float number)
+    {
+        if (number <= 0.3f)
+        {
+            return tiles[0];
+        }if (number <= 0.35f)
+        {
+            return tiles[1];
+        }if (number <= 0.4f)
+        {
+            return tiles[2];
+        }if (number <= 0.45f)
+        {
+            return tiles[3];
+        }
+        if (number <= 0.47f)
+        {
+            return tiles[0];
+        }
+        if (number <= 0.49f)
+        {
+            return tiles[4];
+        }
+        
+        if (number <= 5f)
+        {
+            
+            return tiles[2];
+        }
+
+        return null;
+       
     }
 
     

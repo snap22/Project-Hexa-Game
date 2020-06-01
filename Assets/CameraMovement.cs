@@ -1,37 +1,89 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+
 
 public class CameraMovement : MonoBehaviour
 {
     public float speed = 3f;
+    Camera cam;
 
     Vector2 movement;
     private Rigidbody2D rb;
 
-    public CinemachineVirtualCamera x;
+    Transform camTransform;
 
+    private float zoom;
+
+    float actual;
+    [SerializeField] float minZoom = 1f;
+    [SerializeField] float maxZoom = 5f;
+
+    [SerializeField] Vector2 minLocation = new Vector2(-50f, -50f);
+    [SerializeField] Vector2 maxLocation = new Vector2(50f, 50f);
 
     void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
-        
-        
+        camTransform = cam.transform;
+
+        zoom = cam.orthographicSize;
     }
 
-    // Update is called once per frame
+   
     void Update()
+    {
+        
+        ZoomCamera();
+        MoveCamera();
+    }
+
+
+    // Stara sa o pohyb kamery
+    private void MoveCamera()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
 
+        //Kontrola ci hrac "nevysiel z mapy "
+        if (movement.x > 0 && transform.position.x >= maxLocation.x)
+        {
+            return;
+        }
+        if (movement.x < 0 && transform.position.x <= minLocation.x)
+        {
+            return;
+        }
+        if (movement.y > 0 && transform.position.y >= maxLocation.y)
+        {
+            return;
+        }
+        if (movement.y < 0 && transform.position.y <= minLocation.y)
+        {
+            return;
+        }
+
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
-    void FixedUpdate()
+    //  Stara sa o zoom kamery
+    private void ZoomCamera()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        actual = Input.GetAxis("Mouse ScrollWheel"); 
+        
+        if (actual > 0 && zoom <= minZoom)
+        {
+            return;
+        }
+
+        if (actual < 0 && zoom >= maxZoom)
+        {
+            return;
+        }
+
+        zoom -= actual;
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoom, Time.deltaTime * speed);
     }
 }
