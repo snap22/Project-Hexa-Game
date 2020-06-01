@@ -13,14 +13,14 @@ public class TerrainGeneratorScript : MonoBehaviour
 
 
     public TileBase basic;              //tile pre basic tile map
-    public TileBase swapped;
+    public TileBase newTile;
         
     private Vector3 pos;
     private Vector3Int tilePos;
     private bool shouldDo;
 
 
-
+    
 
     void Start()
     {
@@ -31,6 +31,28 @@ public class TerrainGeneratorScript : MonoBehaviour
 
     void Update()
     {
+        ClickAndShow();
+        //DragAndDraw();
+    }
+
+    private void ClickAndShow()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pos = Input.mousePosition;
+            tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
+            Debug.Log("Position of tile " + tilePos.ToString());
+
+            frontLayerTileMap.SetTile(tilePos, newTile);
+
+        }
+    }
+
+    private void DragAndDraw()
+    {
+        
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             shouldDo = true;
@@ -45,15 +67,11 @@ public class TerrainGeneratorScript : MonoBehaviour
         {
             pos = Input.mousePosition;
             tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-            Debug.Log("Position of tile " + tilePos.ToString());
-                
-            frontLayerTileMap.SetTile(tilePos, swapped);
-        }
 
-        
+            frontLayerTileMap.SetTile(tilePos, newTile);
+        }
     }
 
-    
     void GenerateBasicTileMap()
     {
         for (int riadok = -100; riadok < 100; riadok++)
@@ -67,4 +85,5 @@ public class TerrainGeneratorScript : MonoBehaviour
         }
     }
 
+    
 }
