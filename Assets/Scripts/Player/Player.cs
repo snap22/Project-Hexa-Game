@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Player
 {
-    PlayerBuildings buildings { get; }
+    public PlayerBuildings buildings { get; private set; }
+    public LevelHandler levelHandler { get; private set; }
 
     public int goldAmount { get; private set; }
     public int woodAmount { get; private set; }
     public int stoneAmount { get; private set; }
-    public int level { get; private set; }
-    public int currentXp { get; private set; }
-    public int requiredtXp { get; private set; }
 
+    
 
     public Player()
     {
@@ -22,10 +21,10 @@ public class Player
         this.woodAmount = 0;
         this.stoneAmount = 0;
 
-        this.level = 1;
-        this.currentXp = 0;
-        this.requiredtXp = 10;
+        this.levelHandler = new LevelHandler(10, 10);
     }
+
+    
 
     // Prida budovu do zoznamu, ak hrac nema dostatok penazi, dreva alebo kamena tak vrati exception
     public void AddBuilding(Building building)
@@ -42,6 +41,8 @@ public class Player
         this.stoneAmount -= building.stoneCost;
         this.woodAmount -= building.woodCost;
 
+        AddXp(building.xpReward);
+
     }
 
 
@@ -54,6 +55,11 @@ public class Player
         this.stoneAmount += building.stoneCost / 2;
         this.woodAmount += building.woodCost / 2;
 
+    }
+
+    public void UpdateBuildings()
+    {
+        this.buildings.UpdateBuildings();
     }
 
     // Prida goldy
@@ -83,14 +89,7 @@ public class Player
     // Prida xp
     public void AddXp(int amount)
     {
-        if (amount <= 0)
-            return;
-        this.currentXp += amount;
-
-        while (currentXp >= requiredtXp)
-        {
-            LevelUp();
-        }
+        this.levelHandler.AddXp(amount);
     }
 
     public void AddResources(int gold, int stone, int wood, int xp = 0)
@@ -101,16 +100,6 @@ public class Player
         AddXp(xp);
     }
 
-    // Zvysi level
-    private void LevelUp()
-    {
-        if (currentXp >= this.requiredtXp)
-        {
-            this.level++;
-            this.currentXp -= this.requiredtXp;
-            this.requiredtXp += 10;
-        }
-    }
     
     
 }
