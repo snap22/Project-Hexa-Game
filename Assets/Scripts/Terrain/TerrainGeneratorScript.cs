@@ -107,7 +107,8 @@ public class TerrainGeneratorScript : MonoBehaviour
             {
                 
                 tilePos = new Vector3Int(row - halfSize, column - halfSize, 0);
-                basicTileMap.SetTile(tilePos, TestGen(row - halfSize, column - halfSize));
+                //basicTileMap.SetTile(tilePos, TestGen(row - halfSize, column - halfSize));
+                basicTileMap.SetTile(tilePos, basic);
                 lockedTileMap.SetTile(tilePos, lockedTile);
             }
         }
