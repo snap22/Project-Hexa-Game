@@ -8,9 +8,13 @@ public class TerrainModifier : MonoBehaviour
 {
     
     public Tilemap tileMap;
+    public Tilemap lockedTileMap;
+
+    [SerializeField]
     private TileBase currentTile;
 
     private ITool currentTool;
+    private ToolManager tools;
 
     private Vector3 pos;
     private Vector3Int tilePos;
@@ -21,8 +25,11 @@ public class TerrainModifier : MonoBehaviour
 
     void Start()
     {
-        this.currentTool = new BuildTool();
-        
+        this.tools = new ToolManager(lockedTileMap);
+        this.currentTool = tools.GetTool(0);
+
+        this.currentBuilding = new StarterHouse();
+        this.currentTool.Draw(Vector3Int.zero, tileMap, BuildingSelect.Instance.GetBuildingTile(BuildingType.StartingHouse));
     }
 
     void Update()
@@ -31,12 +38,27 @@ public class TerrainModifier : MonoBehaviour
     }
     private void ClickAndDo()
     {
-        if (Input.GetMouseButtonDown(0))    //left click        -- unlock
+        if (Input.GetMouseButtonDown(0))    //left click        -- build
         {
             pos = Input.mousePosition;
             tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
+
+            //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
+            currentTool = tools.GetTool(0);
             currentTool.Draw(tilePos, tileMap, currentTile);
-            currentTool.Manage(playerManager.player, currentBuilding);
+            
+
+        }
+
+        if (Input.GetMouseButtonDown(1))    //right click        -- unlock
+        {
+            pos = Input.mousePosition;
+            tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
+
+            //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
+            currentTool = tools.GetTool(1);
+            currentTool.Draw(tilePos, tileMap, currentTile);
+
 
         }
 
@@ -49,4 +71,6 @@ public class TerrainModifier : MonoBehaviour
         this.currentBuilding = BuildingSelect.Instance.GetBuilding(selection.value);
         this.currentTile = BuildingSelect.Instance.GetBuildingTile(selection.value);
     }
+
+
 }

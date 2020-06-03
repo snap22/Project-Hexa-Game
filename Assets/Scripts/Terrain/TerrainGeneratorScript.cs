@@ -38,41 +38,6 @@ public class TerrainGeneratorScript : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        //ClickAndShow();
-        //DragAndDraw();
-    }
-
-    /*private void ClickAndShow()
-    {
-        if (Input.GetMouseButtonDown(0))    //left click        -- unlock
-        {
-            pos = Input.mousePosition;
-            tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-            UnlockNeighbours(tilePos, 2);
-
-        }
-        if (Input.GetMouseButtonDown(1))   //right click       -- build
-        {
-            pos = Input.mousePosition;
-            tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-            TileBase selectedTile = lockedTileMap.GetTile(tilePos);
-            if (selectedTile == null)
-            {
-                if (frontLayerTileMap.GetTile(tilePos) == null)
-                    frontLayerTileMap.SetTile(tilePos, newTile);
-                else
-                    Debug.Log("This tile is not empty");
-            } else
-            {
-                Debug.Log("Tile is locked");
-            }
-            
-        }
-    }*/
-
-    // unlockne susedov na zaklade pozicie
     private void UnlockNeighbours(Vector3Int position)
     {
         
@@ -83,22 +48,6 @@ public class TerrainGeneratorScript : MonoBehaviour
         }
         lockedTileMap.SetTile(position, null);
     }
-
-    private void UnlockNeighbours(Vector3Int position, int radius)
-    {
-        //Debug.Log("Tile " + position.ToString());
-        //Debug.Log("Neighbours:");
-        List<Vector3Int> neighbours = tm.GetNeighbours(position, radius);
-        foreach (Vector3Int neighbour in neighbours)
-        {
-            lockedTileMap.SetTile(neighbour, null);
-            //Debug.Log(neighbour);
-
-        }
-        lockedTileMap.SetTile(position, null);
-    }
-
-
 
     // vygeneruje tilemap
     void GenerateBasicTileMap()
@@ -114,7 +63,8 @@ public class TerrainGeneratorScript : MonoBehaviour
             }
         }
         UnlockNeighbours(Vector3Int.zero);
-        frontLayerTileMap.SetTile(Vector3Int.zero, newTile);
+        //frontLayerTileMap.SetTile(Vector3Int.zero, newTile);
+        
     }
 
 

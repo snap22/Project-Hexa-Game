@@ -70,6 +70,17 @@ public class Player
         this.goldAmount += amount;
     }
 
+    public void RemoveGold(int amount)
+    {
+        if (amount <= 0)
+            return;
+        if (amount > this.goldAmount)
+        {
+            throw new NoMoneyException();
+        }
+        this.goldAmount -= amount;
+    }
+
     // Prida drevo
     public void AddWood(int amount)
     {
