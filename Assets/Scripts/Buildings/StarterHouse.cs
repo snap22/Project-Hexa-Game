@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class StarterHouse : Building
 {
-    private int goldReward;
+    
     public StarterHouse(TileBase tile, TileBase picture) : base("House", tile, picture, 0, 0, 0, 5, 5, 0)
     {
-        this.goldReward = 2;
+        
     }
     public override void DoStuff(Player player)
     {
@@ -18,10 +18,12 @@ public class StarterHouse : Building
         }
         catch (LevelUpException)
         {
-            this.goldReward = base.Level * 2;
+            // do nothing
         }
 
-        player.AddGold(this.goldReward);
+        player.AddGold(2);
+        player.AddWood(1);
+        player.AddStone(1);
 
     }
 

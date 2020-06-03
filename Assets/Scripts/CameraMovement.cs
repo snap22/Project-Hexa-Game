@@ -29,6 +29,7 @@ public class CameraMovement : MonoBehaviour
         camTransform = cam.transform;
 
         zoom = cam.orthographicSize;
+        cam.orthographicSize = 20;
     }
 
    
