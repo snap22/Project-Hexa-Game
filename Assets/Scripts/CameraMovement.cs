@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    // rychlosti
     public float speed = 3f;
+    public float boost = 1f;
+
     private float boostSpeed = 1f;
+
     Camera cam;
 
     Vector2 movement;
@@ -67,9 +71,11 @@ public class CameraMovement : MonoBehaviour
             return;
         }
 
+
+        // pokial drzi shift tak je rychlejsi
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            boostSpeed = speed;
+            boostSpeed = boost;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))

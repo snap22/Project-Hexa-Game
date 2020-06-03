@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -41,8 +42,11 @@ public class TerrainModifier : MonoBehaviour
     }
     private void ClickAndDo()
     {
-        if (Input.GetMouseButtonDown(0))    //left click        -- build
+        if (Input.GetMouseButtonDown(0))    //left click        
         {
+            if (EventSystem.current.IsPointerOverGameObject())  // ak je kliknute na UI tak nic nespravi
+                return;
+
             pos = Input.mousePosition;
             tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
 

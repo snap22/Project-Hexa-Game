@@ -15,6 +15,7 @@ public class ToolButtonScript : MonoBehaviour
         SetButtonActive(0);
     }
 
+    // zmeni farbu buttonu podla zadaneho indexu
     public void SetButtonActive(int index)
     {
         buttons[selectedButtonIndex].color = normalColor;
