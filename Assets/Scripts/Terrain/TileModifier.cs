@@ -40,6 +40,31 @@ public class TileModifier
         return neighbours;
     }
 
+    public List<Vector3Int> GetNeighbours(Vector3Int tilePosition, int radius)
+    {
+        List<Vector3Int> neighbours = new List<Vector3Int>();
+        int x = tilePosition.x;
+        int y = tilePosition.y;
+        int z = tilePosition.z;
+
+        Vector3Int newPos;
+
+        for (int i = x - radius; i <= x + radius; i++)
+        {
+            for (int j = y - radius; j <= y + radius; j++)
+            {
+                
+                newPos = new Vector3Int(i, j, z);
+                
+                neighbours.Add(newPos);
+            }
+        }
+
+        return neighbours;
+    }
+
+   
+
     // TODO - unlocknut 6 susedov v zavislosti od smeru - zhora, zdola, zlava, zprava, okolo
-    
+
 }

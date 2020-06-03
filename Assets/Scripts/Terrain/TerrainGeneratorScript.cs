@@ -50,7 +50,7 @@ public class TerrainGeneratorScript : MonoBehaviour
         {
             pos = Input.mousePosition;
             tilePos = basicTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-            UnlockNeighbours(tilePos);
+            UnlockNeighbours(tilePos, 2);
 
         }
         if (Input.GetMouseButtonDown(1))   //right click       -- build
@@ -75,6 +75,7 @@ public class TerrainGeneratorScript : MonoBehaviour
     // unlockne susedov na zaklade pozicie
     private void UnlockNeighbours(Vector3Int position)
     {
+        
         List<Vector3Int> neighbours = tm.GetNeighbours(position);
         foreach (Vector3Int neighbour in neighbours)
         {
@@ -83,7 +84,21 @@ public class TerrainGeneratorScript : MonoBehaviour
         lockedTileMap.SetTile(position, null);
     }
 
-    
+    private void UnlockNeighbours(Vector3Int position, int radius)
+    {
+        //Debug.Log("Tile " + position.ToString());
+        //Debug.Log("Neighbours:");
+        List<Vector3Int> neighbours = tm.GetNeighbours(position, radius);
+        foreach (Vector3Int neighbour in neighbours)
+        {
+            lockedTileMap.SetTile(neighbour, null);
+            //Debug.Log(neighbour);
+
+        }
+        lockedTileMap.SetTile(position, null);
+    }
+
+
 
     // vygeneruje tilemap
     void GenerateBasicTileMap()
