@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class StarterHouse : Building
 {
     
-    public StarterHouse(TileBase tile, TileBase picture) : base("House", tile, picture, 0, 0, 0, 5, 5, 0)
+    public StarterHouse() : base("House", 0, 0, 0, 5, 5, 0)
     {
         
     }

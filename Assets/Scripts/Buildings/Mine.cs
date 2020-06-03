@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Mine : Building
 {
     private int stoneReward;
-    public Mine(TileBase tile, TileBase picture) : base("Mine", tile, picture, 40, 20, 20, 10, 10, 2)
+    public Mine() : base("Mine", 40, 20, 20, 10, 10, 2)
     {
         this.stoneReward = 2;
     }

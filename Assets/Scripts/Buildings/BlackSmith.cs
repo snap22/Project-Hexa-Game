@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class BlackSmith : Building
 {
     private int goldReward;
-    public BlackSmith(TileBase tile, TileBase picture) : base("Blacksmith", tile, picture, 200, 100, 100, 20, 20, 4)
+    public BlackSmith() : base("Blacksmith", 200, 100, 100, 20, 20, 4)
     {
         this.goldReward = 5;
     }

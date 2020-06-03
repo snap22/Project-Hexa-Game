@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Cutter : Building
 {
     private int woodReward;
-    public Cutter(TileBase tile, TileBase picture) : base("Cutter", tile, picture, 80, 50, 50, 10, 10, 2)
+    public Cutter() : base("Cutter", 80, 50, 50, 10, 10, 2)
     {
         this.woodReward = 2;
     }

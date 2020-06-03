@@ -8,7 +8,7 @@ public class Castle : Building
     private int goldReward;
     private int woodReward;
     private int stoneReward;
-    public Castle(TileBase tile, TileBase picture) : base("Castle", tile, picture, 5000, 500, 1000, 20, 20, 10)
+    public Castle() : base("Castle", 5000, 500, 1000, 20, 20, 10)
     {
         this.goldReward = 50;
         this.stoneReward = 5;

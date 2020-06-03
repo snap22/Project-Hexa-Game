@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Lumber : Building
 {
     private int woodReward;
-    public Lumber(TileBase tile, TileBase picture) : base("Lumber", tile, picture, 20, 20, 0, 1)
+    public Lumber() : base("Lumber", 20, 20, 0, 1)
     {
         this.woodReward = 1;
     }

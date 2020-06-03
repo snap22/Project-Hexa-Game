@@ -40,11 +40,11 @@ public class TerrainGeneratorScript : MonoBehaviour
 
     void Update()
     {
-        ClickAndShow();
+        //ClickAndShow();
         //DragAndDraw();
     }
 
-    private void ClickAndShow()
+    /*private void ClickAndShow()
     {
         if (Input.GetMouseButtonDown(0))    //left click        -- unlock
         {
@@ -70,7 +70,7 @@ public class TerrainGeneratorScript : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
     // unlockne susedov na zaklade pozicie
     private void UnlockNeighbours(Vector3Int position)
@@ -117,6 +117,8 @@ public class TerrainGeneratorScript : MonoBehaviour
         frontLayerTileMap.SetTile(Vector3Int.zero, newTile);
     }
 
+
+    
 
 
 

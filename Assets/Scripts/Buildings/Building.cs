@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public abstract class Building
 {
-    public TileBase tile;
-    public TileBase picture;
 
     private LevelHandler lh;
     public int goldCost { get; private set; }
@@ -22,16 +19,14 @@ public abstract class Building
         get { return this.lh.level; }
     }
     
-    protected Building(string name, TileBase tile, TileBase picture, int goldCost, int woodCost, int stoneCost, int xpReward) : this(name,tile, picture, goldCost, woodCost, stoneCost, 5, 5, xpReward)
+    protected Building(string name, int goldCost, int woodCost, int stoneCost, int xpReward) : this(name, goldCost, woodCost, stoneCost, 5, 5, xpReward)
     {
         
     }
 
-    protected Building(string name, TileBase tile, TileBase picture, int goldCost, int woodCost, int stoneCost, int requiredXp, int increaseXp, int xpReward)
+    protected Building(string name, int goldCost, int woodCost, int stoneCost, int requiredXp, int increaseXp, int xpReward)
     {
         this.name = name;
-        this.tile = tile;
-        this.picture = picture;
         this.goldCost = goldCost;
         this.woodCost = woodCost;
         this.stoneCost = stoneCost;
