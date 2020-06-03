@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TerrainModifier : MonoBehaviour
 {
-    
+    public ToolButtonScript toolScript;
     public Tilemap tileMap;
     public Tilemap lockedTileMap;
 
@@ -26,10 +26,13 @@ public class TerrainModifier : MonoBehaviour
     void Start()
     {
         this.tools = new ToolManager(lockedTileMap);
-        this.currentTool = tools.GetTool(0);
+        SetTool(1);    //build tool
 
         this.currentBuilding = new StarterHouse();
         this.currentTool.Draw(Vector3Int.zero, tileMap, BuildingSelect.Instance.GetBuildingTile(BuildingType.StartingHouse));
+        playerManager.player.AddBuilding(new StarterHouse());
+
+        SetTool(0); //select tool
     }
 
     void Update()
@@ -44,23 +47,12 @@ public class TerrainModifier : MonoBehaviour
             tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
 
             //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
-            currentTool = tools.GetTool(0);
+            //currentTool = tools.GetTool(0);
             currentTool.Draw(tilePos, tileMap, currentTile);
             
 
         }
 
-        if (Input.GetMouseButtonDown(1))    //right click        -- unlock
-        {
-            pos = Input.mousePosition;
-            tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-
-            //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
-            currentTool = tools.GetTool(1);
-            currentTool.Draw(tilePos, tileMap, currentTile);
-
-
-        }
 
     }
 
@@ -72,5 +64,11 @@ public class TerrainModifier : MonoBehaviour
         this.currentTile = BuildingSelect.Instance.GetBuildingTile(selection.value);
     }
 
+
+    public void SetTool(int index)
+    {
+        this.currentTool = this.tools.GetTool(index);
+        toolScript.SetButtonActive(index);
+    }
 
 }

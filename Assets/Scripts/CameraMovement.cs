@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public float speed = 3f;
+    private float boostSpeed = 1f;
     Camera cam;
 
     Vector2 movement;
@@ -66,7 +67,16 @@ public class CameraMovement : MonoBehaviour
             return;
         }
 
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            boostSpeed = speed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            boostSpeed = 1f;
+        }
+        rb.MovePosition(rb.position + movement * boostSpeed * speed * Time.fixedDeltaTime);
     }
 
     //  Stara sa o zoom kamery

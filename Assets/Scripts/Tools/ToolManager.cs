@@ -10,8 +10,11 @@ public class ToolManager
     {
         tools = new List<ITool>();
 
+        tools.Add(new SelectionTool());
         tools.Add(new BuildTool(lockedTileMap));
         tools.Add(new UnlockTool(lockedTileMap));
+        tools.Add(new RemoveTool());
+        
     }
 
     public ITool GetTool(int index)
