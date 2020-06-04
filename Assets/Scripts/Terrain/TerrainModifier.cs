@@ -53,8 +53,8 @@ public class TerrainModifier : MonoBehaviour
             //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
             //currentTool = tools.GetTool(0);
             currentTool.Draw(tilePos, tileMap, currentTile);
-            
 
+            
         }
 
 

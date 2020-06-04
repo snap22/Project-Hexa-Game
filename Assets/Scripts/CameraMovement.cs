@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -88,8 +88,11 @@ public class CameraMovement : MonoBehaviour
     //  Stara sa o zoom kamery
     private void ZoomCamera()
     {
-        actual = Input.GetAxis("Mouse ScrollWheel"); 
-        
+        actual = Input.GetAxis("Mouse ScrollWheel");
+        if (EventSystem.current.IsPointerOverGameObject())  // ak je kliknute na UI tak nic nespravi
+            return;
+
+
         if (actual > 0 && zoom <= minZoom)
         {
             return;

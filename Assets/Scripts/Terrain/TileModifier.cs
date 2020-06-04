@@ -5,6 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class TileModifier
 {
+    List<Vector3Int> bannedEven;
+    List<Vector3Int> bannedOdd;
+    public TileModifier()
+    {
+
+    }
+
     public List<Vector3Int> GetNeighbours(Vector3Int tilePosition)
     {
         List<Vector3Int> neighbours = new List<Vector3Int>();
@@ -57,6 +64,8 @@ public class TileModifier
                 newPos = new Vector3Int(i, j, z);
                 
                 neighbours.Add(newPos);
+                
+                
             }
         }
 
@@ -64,6 +73,8 @@ public class TileModifier
     }
 
    
+   
+    
 
     // TODO - unlocknut 6 susedov v zavislosti od smeru - zhora, zdola, zlava, zprava, okolo
 

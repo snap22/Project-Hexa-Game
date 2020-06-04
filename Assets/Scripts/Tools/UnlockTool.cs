@@ -27,8 +27,7 @@ public class UnlockTool : ITool
             lockedTileMap.SetTile(neighbour, null);
         }
 
-        lockedTileMap.SetTile(position, null);
-        numberOfNeigbours++;
+        
     }
 
     public void Manage(Player player, Building building)
