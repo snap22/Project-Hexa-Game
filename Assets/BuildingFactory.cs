@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BuildingFactory : MonoBehaviour
 {
@@ -39,6 +40,23 @@ public class BuildingFactory : MonoBehaviour
         return GenerateBuilding(current);
     }
 
+    public Sprite GetPicture(string buildingName)
+    {
+        if (!dictionary.ContainsKey(buildingName))
+            return null;
+
+        return dictionary[buildingName].picture;
+    }
+
+    public TileBase GetTile(string buildingName)
+    {
+        if (!dictionary.ContainsKey(buildingName))
+            return null;
+
+        return dictionary[buildingName].tile;
+    }
+
+    
 
     // vrati budovu na zaklade blueprintu, podla efficiency nastavi urcite hodnoty a podla typu vrati konkretnu budovu
     private Building GenerateBuilding(Blueprint blueprint)
