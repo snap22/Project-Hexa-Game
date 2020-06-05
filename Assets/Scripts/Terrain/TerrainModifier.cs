@@ -20,20 +20,18 @@ public class TerrainModifier : MonoBehaviour
     private Vector3 pos;
     private Vector3Int tilePos;
 
-    public Dropdown selection;
     public PlayerManager playerManager;
     private Building currentBuilding;
 
+    private BuildingFactory factory;
+
     void Start()
     {
+        factory = BuildingFactory.Instance;
+
         this.tools = new ToolManager(lockedTileMap);
-        SetTool(1);    //build tool
 
-        this.currentBuilding = new StarterHouse();
-        this.currentTool.Draw(Vector3Int.zero, tileMap, BuildingSelect.Instance.GetBuildingTile(BuildingType.StartingHouse));
-        playerManager.player.AddBuilding(new StarterHouse());
-
-        SetTool(0); //select tool
+        this.BuildAStarterHouseAtTheBeginning();
     }
 
     void Update()
@@ -61,11 +59,12 @@ public class TerrainModifier : MonoBehaviour
     }
 
     
-    // nastavi aktualny tile podla toho co je vybrate na dropdown menu
-    public void SetTile() 
+    // nastavi aktualny tile podla toho co je kliknute
+    public void SetTile(string name) 
     {
-        this.currentBuilding = BuildingSelect.Instance.GetBuilding(selection.value);
-        this.currentTile = BuildingSelect.Instance.GetBuildingTile(selection.value);
+        this.currentBuilding = factory.GetBuilding(name);
+        this.currentTile = factory.GetTile(name);
+        SetTool(1); //nastavi na building tool automaticky
     }
 
 
@@ -75,4 +74,17 @@ public class TerrainModifier : MonoBehaviour
         toolScript.SetButtonActive(index);
     }
 
+
+
+    private void BuildAStarterHouseAtTheBeginning()
+    {
+        this.SetTile("Starting House");
+        this.currentTool.Draw(Vector3Int.zero, tileMap, this.currentTile);
+        playerManager.player.AddBuilding(this.currentBuilding);
+
+        // resetne naspäť
+        this.currentBuilding = null;
+        this.currentTile = null;
+        SetTool(0); //select tool
+    }
 }

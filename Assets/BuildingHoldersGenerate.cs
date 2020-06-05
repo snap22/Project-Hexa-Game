@@ -6,51 +6,37 @@ using UnityEngine.UI;
 
 public class BuildingHoldersGenerate : MonoBehaviour
 {
-    
+
+    public TerrainModifier terrainModifier;
 
     private BuildingFactory factory;
 
     
-    public GameObject shit;
+    public GameObject prefab;   // prefab pre building holder
     void Start()
     {
         factory = BuildingFactory.Instance;
         
-        /*for (int i = 0; i < holders.Length; i++)
-        {
-            if (i >= factory.buildings.Length)
-            {
-                holders[i].SetActive(false);
-            }
-            else
-            {
-                SetupObject(holders[i], factory.buildings[i]);
-            }
-
-            
-        }*/
-
         for (int i = 0; i < factory.buildings.Length; i++)
         {
-            Setup(factory.buildings[i], i);
+            SetupHolder(factory.buildings[i]);
         }
 
         
     }
 
-    private void Setup(Blueprint blueprint, int index)
+    // pre kazdu instanciu prefabu, t.j buidling holder prida event
+    private void SetupHolder(Blueprint blueprint)
     {
-        //GameObject obj = shit;
-        GameObject obj = Instantiate(shit, transform) as GameObject;
+        GameObject obj = Instantiate(prefab, transform) as GameObject;
         obj.GetComponentInChildren<Image>().sprite = blueprint.picture;
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate { ChangeTile(blueprint.name); });
-        //Instantiate(obj, transform);
     }
 
     
 
     public void ChangeTile(string name)
     {
-        Debug.Log(name);
+        terrainModifier.SetTile(name);
     }
 }
