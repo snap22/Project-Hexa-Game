@@ -19,6 +19,10 @@ public class BuildingHoldersGenerate : MonoBehaviour
         
         for (int i = 0; i < factory.buildings.Length; i++)
         {
+            if (factory.buildings[i].name == "Starting House")
+            {
+                continue;
+            }
             SetupHolder(factory.buildings[i]);
         }
 
