@@ -23,7 +23,6 @@ public class ButtonManager : MonoBehaviour
                 this.button.color = normalColor;
         }
 
-        
 
 
     }
@@ -41,11 +40,15 @@ public class ButtonManager : MonoBehaviour
 
     public void SetPanelActive(int index)       // todo - na treti klik rovnakeho buttonu aby to slo 
     {
-        buttons[index].SetPanel(true, selectedColor, normalColor);
         
+        buttons[index].SetPanel(true, selectedColor, normalColor);
         if (current >= 0)
             buttons[current].SetPanel(false, selectedColor, normalColor);
+        
 
         current = index;
+
+        
+        
     }
 }

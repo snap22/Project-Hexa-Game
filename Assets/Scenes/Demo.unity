@@ -587,7 +587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -145.77, y: 13.2}
+  m_AnchoredPosition: {x: -145.77002, y: 13.200012}
   m_SizeDelta: {x: -291.54, y: 25.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &296447731
@@ -610,7 +610,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 314671953}
   - component: {fileID: 314671952}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Wood Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,8 +740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.985001, y: 0}
-  m_SizeDelta: {x: 19.970001, y: 0}
+  m_AnchoredPosition: {x: 10.18, y: -1.45}
+  m_SizeDelta: {x: 12.26, y: -7.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &325056320
 MonoBehaviour:
@@ -1557,7 +1557,7 @@ GameObject:
   - component: {fileID: 605122284}
   - component: {fileID: 605122283}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Gold Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1683,7 +1683,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1890,7 +1890,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2762,7 +2762,7 @@ GameObject:
   - component: {fileID: 1755247760}
   - component: {fileID: 1755247759}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Stone Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2895,6 +2895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18af2193120541c41878ef3c24b96ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldText: {fileID: 605122283}
+  woodText: {fileID: 314671952}
+  stoneText: {fileID: 1755247759}
 --- !u!4 &1808105348
 Transform:
   m_ObjectHideFlags: 0
