@@ -87,11 +87,6 @@ public class TerrainModifier : MonoBehaviour
             {
                 Debug.Log("Not enough wood");
             }
-            
-
-
-
-
 
         }
 

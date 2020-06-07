@@ -17,9 +17,10 @@ public class SelectionTool : ITool
 
     public void Manage(Player player, Building building, Vector3Int position)
     {
-        // do nothing
         // SHOW BUILDING
-        Debug.Log(player.GetBuilding(position).ToString());
+        Building selectedBuilding = player.GetBuilding(position);
+        if (selectedBuilding != null)
+            Debug.Log(selectedBuilding.ToString());
     }
 
 }

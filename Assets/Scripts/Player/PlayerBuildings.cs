@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class PlayerBuildings
 {
-    private List<Building> buildings;
     private Player player;
 
     private Dictionary<Vector3Int, Building> test;
 
     public PlayerBuildings(Player player)
     {
-        buildings = new List<Building>();
         this.player = player;
         test = new Dictionary<Vector3Int, Building>();
     }
@@ -23,23 +21,10 @@ public class PlayerBuildings
         if (building == null)
             throw new NoBuildingException();
 
-        //buildings.Add(building);
-
         test[position] = building;
     }
 
-    // vymaze budovu zo zoznamu
-    /*public void Remove(Building building)
-    {
-        if (building == null)
-            throw new NoBuildingException();
-        if (!buildings.Contains(building))
-            throw new WrongBuildingException();
-
-        buildings.Remove(building);
-        
-    }*/
-
+    // vymaze budovu zo zoznamu podla pozicie a vrati ju
     public Building Remove(Vector3Int position)
     {
         if (!test.ContainsKey(position))
@@ -56,11 +41,7 @@ public class PlayerBuildings
 
     public void UpdateBuildings()
     {
-        /*
-        foreach (Building building in buildings)
-        {
-            building.DoStuff(player);
-        }*/
+
 
         foreach (Building building in test.Values)
             building.DoStuff(this.player);
@@ -68,16 +49,6 @@ public class PlayerBuildings
 
     internal Building GetBuilding(Vector3Int position)
     {
-        /*
-        foreach (Building building in buildings)
-        {
-            if (building.position == position)
-                return building;
-        }
-
-        return null;
-        */
-
         if (!test.ContainsKey(position))
             return null;
 
