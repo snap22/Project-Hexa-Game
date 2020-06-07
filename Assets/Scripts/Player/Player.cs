@@ -58,7 +58,7 @@ public class Player
     public void RemoveBuilding(Vector3Int position)
     {
         Building building = this.buildings.Remove(position);
-
+        
         if (building == null)
             return;
 

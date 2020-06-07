@@ -67,6 +67,10 @@ public class TerrainModifier : MonoBehaviour
             {
                 Debug.Log("Tile is not empty");
             }
+            catch (NotRemovableBuildingException)
+            {
+                Debug.Log("You cannot remove this building.");
+            }
             catch (LockedTileException)
             {
                 Debug.Log("Tile is locked");
@@ -87,6 +91,7 @@ public class TerrainModifier : MonoBehaviour
             {
                 Debug.Log("Not enough wood");
             }
+            
 
         }
 
