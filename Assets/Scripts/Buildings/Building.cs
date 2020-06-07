@@ -6,6 +6,7 @@ public abstract class Building
 {
 
     private LevelHandler lh;
+
     public int goldCost { get; private set; }
     public int woodCost { get; private set; }
     public int stoneCost { get; private set; }
@@ -48,4 +49,8 @@ public abstract class Building
         this.lh.AddXp(amount);
     }
 
+    public override string ToString()
+    {
+        return string.Format("Building ({0}, gold: {1}, wood: {2}, stone: {3}, level: {4} ", this.name, goldCost, woodCost, stoneCost, Level);
+    }
 }

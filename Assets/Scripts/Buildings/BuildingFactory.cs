@@ -114,15 +114,15 @@ public class BuildingFactory : MonoBehaviour
         switch (blueprint.type)
         {
             case Category.Wood:
-                return new WoodGiving(name, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
+                return new WoodGiving(buildingName, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
             case Category.Stone:
-                return new StoneGiving(name, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
+                return new StoneGiving(buildingName, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
             case Category.Gold:
-                return new GoldGiving(name, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
+                return new GoldGiving(buildingName, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialRewardIncrease);
             case Category.Multi:
-                return new MultiGiving(name, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialReward, materialReward, materialRewardIncrease);
+                return new MultiGiving(buildingName, goldCost, woodCost, stoneCost, requiredXp, increaseXp, xpReward, materialReward, materialReward, materialReward, materialRewardIncrease);
             case Category.Decoration:
-                return new Decoration(name, goldCost);
+                return new Decoration(buildingName, goldCost);
 
         }
 

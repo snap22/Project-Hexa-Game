@@ -48,11 +48,51 @@ public class TerrainModifier : MonoBehaviour
             pos = Input.mousePosition;
             tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
 
-            //currentTool.Manage(playerManager.player, currentBuilding);      //ak hodi exceptiony - zachytit a osetrit
-            //currentTool = tools.GetTool(0);
-            currentTool.Draw(tilePos, tileMap, currentTile);
-
             
+            try
+            {
+
+                currentTool.Check(tilePos, tileMap);        // pozrie sa ci je vybraty tile "v poriadku" - ak nie hodi exception
+
+                /*if (!(currentTool is BuildTool))
+                    this.currentBuilding = playerManager.player.GetBuilding(tilePos);*/
+
+                currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
+                currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
+                playerManager.UpdateResourcesText();
+
+                
+            }
+            catch (OccupiedTileException)
+            {
+                Debug.Log("Tile is not empty");
+            }
+            catch (LockedTileException)
+            {
+                Debug.Log("Tile is locked");
+            }
+            catch (EmptyTileException)
+            {
+                Debug.Log("Tile is empty");
+            }
+            catch (NoMoneyException)
+            {
+                Debug.Log("Not enough money");
+            }
+            catch (NoStoneException)
+            {
+                Debug.Log("Not enough stone");
+            }
+            catch (NoWoodException)
+            {
+                Debug.Log("Not enough wood");
+            }
+            
+
+
+
+
+
         }
 
 
@@ -80,7 +120,7 @@ public class TerrainModifier : MonoBehaviour
     {
         this.SetTile("Starting House");
         this.currentTool.Draw(Vector3Int.zero, tileMap, this.currentTile);
-        playerManager.player.AddBuilding(this.currentBuilding);
+        playerManager.player.AddBuilding(this.currentBuilding, Vector3Int.zero);
 
         // resetne naspäť
         this.currentBuilding = null;

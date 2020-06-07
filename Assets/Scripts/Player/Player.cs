@@ -17,9 +17,9 @@ public class Player
     {
         buildings = new PlayerBuildings(this);
 
-        this.goldAmount = 0;
-        this.woodAmount = 0;
-        this.stoneAmount = 0;
+        this.goldAmount = 5000;
+        this.woodAmount = 5000;
+        this.stoneAmount = 5000;
 
         this.levelHandler = new LevelHandler(10, 10);
     }
@@ -27,9 +27,9 @@ public class Player
     
 
     // Prida budovu do zoznamu, ak hrac nema dostatok penazi, dreva alebo kamena tak vrati exception
-    public void AddBuilding(Building building)
+    public void AddBuilding(Building building, Vector3Int position)
     {
-        this.buildings.Add(building);
+        this.buildings.Add(building, position);
         if (this.goldAmount < building.goldCost)
             throw new NoMoneyException();
         if (this.stoneAmount < building.stoneCost)
@@ -41,20 +41,39 @@ public class Player
         this.stoneAmount -= building.stoneCost;
         this.woodAmount -= building.woodCost;
 
-        AddXp(building.xpReward);
+        try
+        {
+            AddXp(building.xpReward);
+        }
+        catch (LevelUpException)
+        {
+            Debug.Log("Leveled up!");
+        }
 
+        Debug.Log("Adding " +  building.ToString());
     }
 
 
     //Vymaze budovu a vrati hracovi tretinu ceny budovy, a polovicu dreva a kamenov ktore vynalozil na kupu budovy 
-    public void RemoveBuilding(Building building)
+    public void RemoveBuilding(Vector3Int position)
     {
-        this.buildings.Remove(building);
+        Building building = this.buildings.Remove(position);
+
+        if (building == null)
+            return;
 
         this.goldAmount += building.goldCost / 3;
         this.stoneAmount += building.stoneCost / 2;
         this.woodAmount += building.woodCost / 2;
 
+        Debug.Log("Removing " + building.ToString());
+
+
+    }
+
+    public Building GetBuilding(Vector3Int position)
+    {
+        return this.buildings.GetBuilding(position);
     }
 
     public void UpdateBuildings()

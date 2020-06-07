@@ -15,6 +15,12 @@ public class UnlockTool : ITool
         this.lockedTileMap = lockedTileMap;
         this.numberOfNeigbours = 0;
     }
+
+    public void Check(Vector3Int position, Tilemap tilemap)
+    {
+
+    }
+
     public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
     {
         numberOfNeigbours = 0;
@@ -30,7 +36,7 @@ public class UnlockTool : ITool
         
     }
 
-    public void Manage(Player player, Building building)
+    public void Manage(Player player, Building building, Vector3Int position)
     {
         int price = 0;
         for (int i = 0; i < numberOfNeigbours; i++)

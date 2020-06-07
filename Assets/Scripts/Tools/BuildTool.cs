@@ -11,21 +11,28 @@ public class BuildTool : ITool
     {
         this.lockedMap = lockedMap;
     }
-    public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
+
+    public void Check(Vector3Int position, Tilemap tilemap)
     {
         if (lockedMap.GetTile(position) != null)
         {
-            Debug.Log("Tile is locked");
-            return;
+            throw new LockedTileException();
         }
-        if (tilemap.GetTile(position) == null)
-            tilemap.SetTile(position, tile);
-        else
-            Debug.Log("This tile is not empty");
+
+        if (tilemap.GetTile(position) != null)
+        {
+            throw new OccupiedTileException();
+        }
     }
 
-    public void Manage(Player player, Building building)
+    public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
     {
-        player.AddBuilding(building);
+        tilemap.SetTile(position, tile);
+    }
+
+
+    public void Manage(Player player, Building building, Vector3Int position)
+    {
+        player.AddBuilding(building, position);
     }
 }
