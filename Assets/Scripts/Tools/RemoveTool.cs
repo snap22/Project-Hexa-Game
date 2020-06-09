@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class RemoveTool : ITool
 {
+    private string removingInfo;
+
     public void Check(Vector3Int position, Tilemap tilemap)
     {
         if (tilemap.GetTile(position) == null)
@@ -19,5 +21,12 @@ public class RemoveTool : ITool
     public void Manage(Player player, Building building, Vector3Int position)
     {
         player.RemoveBuilding(position);
+        removingInfo = player.GetRemovingInfo();
+    }
+
+    public void ShowAnimation(ObjectSpawner spawner, Vector3 position)
+    {
+        
+        spawner.SetInfoText(position, removingInfo);
     }
 }

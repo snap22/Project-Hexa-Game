@@ -66,6 +66,10 @@ public class SelectionTool : ITool
 
     }
 
+    public void ShowAnimation(ObjectSpawner spawner, Vector3 position)
+    {
+        // do nothing
+    }
 
     Vector3 CalculatePosition(Vector3 clicked)
     {

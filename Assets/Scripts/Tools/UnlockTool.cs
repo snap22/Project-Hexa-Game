@@ -10,6 +10,7 @@ public class UnlockTool : ITool
     private int numberOfNeigbours;
 
     List<Vector3Int> neighbours;
+    private int price;
 
     public UnlockTool(Tilemap lockedTileMap)
     {
@@ -39,7 +40,7 @@ public class UnlockTool : ITool
 
     public void Manage(Player player, Building building, Vector3Int position)
     {
-        int price = 0;
+        price = 0;
         for (int i = 0; i < numberOfNeigbours; i++)
         {
             price += 5;
@@ -48,4 +49,11 @@ public class UnlockTool : ITool
         player.RemoveGold(price);
     }
 
+    public void ShowAnimation(ObjectSpawner spawner, Vector3 position)
+    {
+        if (price == 0)
+            return;
+
+        spawner.SetInfoText(position, string.Format("   - {0} gold", price));
+    }
 }

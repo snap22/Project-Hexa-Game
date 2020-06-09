@@ -12,6 +12,8 @@ public class TerrainModifier : MonoBehaviour
     public Tilemap tileMap;
     public Tilemap lockedTileMap;
 
+    public ObjectSpawner spawner;
+
     [SerializeField]
     private TileBase currentTile;
 
@@ -59,36 +61,47 @@ public class TerrainModifier : MonoBehaviour
                 currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
                 currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
                 playerManager.UpdateResourcesText();
-
+                currentTool.ShowAnimation(spawner, pos);
                 
             }
             catch (OccupiedTileException)
             {
-                Debug.Log("Tile is not empty");
+                //Debug.Log("Tile is not empty");
+                spawner.SetErrorText(pos, "Tile is not empty");
+            }
+            catch (NoBuildingException)
+            {
+                spawner.SetErrorText(pos, "Choose a building in the shop first");
             }
             catch (NotRemovableBuildingException)
             {
-                Debug.Log("You cannot remove this building.");
+                //Debug.Log("You cannot remove this building.");
+                spawner.SetErrorText(pos, "You cannot remove this building.");
             }
             catch (LockedTileException)
             {
-                Debug.Log("Tile is locked");
+                //Debug.Log("Tile is locked");
+                spawner.SetErrorText(pos, "Tile is locked");
             }
             catch (EmptyTileException)
             {
-                Debug.Log("Tile is empty");
+                //Debug.Log("Tile is empty");
+                spawner.SetErrorText(pos, "Tile is empty");
             }
             catch (NoMoneyException)
             {
-                Debug.Log("Not enough money");
+                //Debug.Log("Not enough money");
+                spawner.SetErrorText(pos, "Not enough money");
             }
             catch (NoStoneException)
             {
-                Debug.Log("Not enough stone");
+                //Debug.Log("Not enough stone");
+                spawner.SetErrorText(pos, "Not enough stone");
             }
             catch (NoWoodException)
             {
-                Debug.Log("Not enough wood");
+                //Debug.Log("Not enough wood");
+                spawner.SetErrorText(pos, "Not enough wood");
             }
             
 

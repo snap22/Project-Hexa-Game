@@ -10,4 +10,7 @@ public interface ITool
     void Manage(Player player, Building building, Vector3Int position);
 
     void Check(Vector3Int position, Tilemap tilemap);
+
+    void ShowAnimation(ObjectSpawner spawner, Vector3 position);
+    
 }

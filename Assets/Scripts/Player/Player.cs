@@ -11,7 +11,8 @@ public class Player
     public int woodAmount { get; private set; }
     public int stoneAmount { get; private set; }
 
-    
+
+    private string removingInfo;
 
     public Player()
     {
@@ -62,13 +63,22 @@ public class Player
         if (building == null)
             return;
 
-        this.goldAmount += building.goldCost / 3;
-        this.stoneAmount += building.stoneCost / 2;
-        this.woodAmount += building.woodCost / 2;
+        int removedGold = building.goldCost / 3;
+        int removedStone = building.stoneCost / 2;
+        int removedWood = building.woodCost / 2;
+
+        this.goldAmount += removedGold;
+        this.stoneAmount += removedStone;
+        this.woodAmount += removedWood;
 
         Debug.Log("Removing " + building.ToString());
 
+        removingInfo = string.Format("  + {0} gold \n   + {1} wood \n   + {2} stone", removedGold, removedWood, removedStone);
+    }
 
+    public string GetRemovingInfo()
+    {
+        return removingInfo;
     }
 
     public Building GetBuilding(Vector3Int position)
