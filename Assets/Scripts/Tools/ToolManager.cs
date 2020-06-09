@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
+using UnityEngine;
 
 public class ToolManager
 {
     private List<ITool> tools;
 
-    public ToolManager(Tilemap lockedTileMap)
+    public ToolManager(Tilemap lockedTileMap, GameObject selectionPanel)
     {
         tools = new List<ITool>();
 
-        tools.Add(new SelectionTool());
+        tools.Add(new SelectionTool(selectionPanel));
         tools.Add(new BuildTool(lockedTileMap));
         tools.Add(new UnlockTool(lockedTileMap));
         tools.Add(new RemoveTool());

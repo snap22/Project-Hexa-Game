@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class TerrainModifier : MonoBehaviour
 {
+    public GameObject selectionPanel;
     public ToolButtonScript toolScript;
     public Tilemap tileMap;
     public Tilemap lockedTileMap;
@@ -29,7 +30,7 @@ public class TerrainModifier : MonoBehaviour
     {
         factory = BuildingFactory.Instance;
 
-        this.tools = new ToolManager(lockedTileMap);
+        this.tools = new ToolManager(lockedTileMap, selectionPanel);
 
         this.BuildAStarterHouseAtTheBeginning();
     }
@@ -47,16 +48,14 @@ public class TerrainModifier : MonoBehaviour
 
             pos = Input.mousePosition;
             tilePos = tileMap.WorldToCell(Camera.main.ScreenToWorldPoint(pos));
-
+            //Debug.Log("Original Position = " + pos.ToString());
             
             try
             {
 
                 currentTool.Check(tilePos, tileMap);        // pozrie sa ci je vybraty tile "v poriadku" - ak nie hodi exception
 
-                /*if (!(currentTool is BuildTool))
-                    this.currentBuilding = playerManager.player.GetBuilding(tilePos);*/
-
+                
                 currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
                 currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
                 playerManager.UpdateResourcesText();

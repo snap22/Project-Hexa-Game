@@ -53,4 +53,14 @@ public abstract class Building
     {
         return string.Format("Building ({0}, gold: {1}, wood: {2}, stone: {3}, level: {4} ", this.name, goldCost, woodCost, stoneCost, Level);
     }
+
+    public int CurrentXp
+    {
+        get { return this.lh.currentXp; }
+    }
+
+    public int RequiredXp
+    {
+        get { return this.lh.requiredXp; }
+    }
 }
