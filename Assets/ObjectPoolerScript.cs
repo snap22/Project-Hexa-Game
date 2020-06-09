@@ -25,7 +25,7 @@ public class ObjectPoolerScript : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            GameObject obj = Instantiate(prefab);
+            GameObject obj = Instantiate(prefab, transform);
             obj.SetActive(false);
             pool[objectId].Enqueue(obj);
 

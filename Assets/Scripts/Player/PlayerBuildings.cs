@@ -7,7 +7,7 @@ public class PlayerBuildings
 {
     private Player player;
 
-    private Dictionary<Vector3Int, Building> test;
+    private Dictionary<Vector3Int, Building> buildings;
 
 
     public int totalGoldPerTurn { get; private set; }
@@ -17,7 +17,7 @@ public class PlayerBuildings
     public PlayerBuildings(Player player)
     {
         this.player = player;
-        test = new Dictionary<Vector3Int, Building>();
+        buildings = new Dictionary<Vector3Int, Building>();
 
         this.totalGoldPerTurn = 0;
         this.totalStonePerTurn = 0;
@@ -30,14 +30,14 @@ public class PlayerBuildings
         if (building == null)
             throw new NoBuildingException();
 
-        test[position] = building;
+        buildings[position] = building;
         
     }
 
     // vymaze budovu zo zoznamu podla pozicie a vrati ju
     public Building Remove(Vector3Int position)
     {
-        if (!test.ContainsKey(position))
+        if (!buildings.ContainsKey(position))
         {
             Debug.Log("No such building here.");
             return null;
@@ -49,7 +49,7 @@ public class PlayerBuildings
         if (building.name == "Starting House")
             throw new NotRemovableBuildingException();
 
-        test.Remove(position);
+        buildings.Remove(position);
         return building;
     }
 
@@ -57,16 +57,16 @@ public class PlayerBuildings
     {
 
 
-        foreach (Building building in test.Values)
+        foreach (Building building in buildings.Values)
             building.DoStuff(this.player);
     }
 
     public Building GetBuilding(Vector3Int position)
     {
-        if (!test.ContainsKey(position))
+        if (!buildings.ContainsKey(position))
             return null;
 
-        return test[position];
+        return buildings[position];
     }
 
     

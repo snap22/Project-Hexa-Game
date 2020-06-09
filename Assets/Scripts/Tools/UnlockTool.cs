@@ -29,7 +29,6 @@ public class UnlockTool : ITool
             if (lockedTileMap.GetTile(neighbour) != null)
                 numberOfNeigbours++;
 
-            lockedTileMap.SetTile(neighbour, null);
         }
     }
         public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
