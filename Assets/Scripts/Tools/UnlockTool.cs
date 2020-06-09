@@ -9,6 +9,8 @@ public class UnlockTool : ITool
     private Tilemap lockedTileMap;
     private int numberOfNeigbours;
 
+    List<Vector3Int> neighbours;
+
     public UnlockTool(Tilemap lockedTileMap)
     {
         tm = new TileModifier();
@@ -18,13 +20,10 @@ public class UnlockTool : ITool
 
     public void Check(Vector3Int position, Tilemap tilemap)
     {
-
-    }
-
-    public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
-    {
         numberOfNeigbours = 0;
-        List<Vector3Int> neighbours = tm.GetNeighbours(position, 2);
+
+        neighbours = tm.GetNeighbours(position, 2);
+        
         foreach (Vector3Int neighbour in neighbours)
         {
             if (lockedTileMap.GetTile(neighbour) != null)
@@ -32,8 +31,11 @@ public class UnlockTool : ITool
 
             lockedTileMap.SetTile(neighbour, null);
         }
-
-        
+    }
+        public void Draw(Vector3Int position, Tilemap tilemap, TileBase tile)
+    {
+        foreach (Vector3Int neighbour in neighbours)
+            lockedTileMap.SetTile(neighbour, null);
     }
 
     public void Manage(Player player, Building building, Vector3Int position)

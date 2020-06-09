@@ -32,14 +32,27 @@ public class ButtonManager : MonoBehaviour
     public MainPanelButton[] buttons;
 
     private int current = -1;
+    private int num;
 
     void Start()
     {
         
     }
 
+    void OnEnable()
+    {
+        
+    }
+
     public void SetPanelActive(int index)       // todo - na treti klik rovnakeho buttonu aby to slo 
     {
+        if (current == index)
+            num++;
+        if (num >= 2)
+        {
+            num = 0;
+            current = -1;
+        }
         
         buttons[index].SetPanel(true, selectedColor, normalColor);
         if (current >= 0)
