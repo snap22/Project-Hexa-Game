@@ -56,8 +56,7 @@ public class Player
             Debug.Log("Leveled up!");
         }
 
-        Debug.Log("Adding " +  building.ToString());
-        CheckAchievements(building);
+        
     }
 
     
@@ -106,7 +105,7 @@ public class Player
         if (amount <= 0)
             return;
         this.goldAmount += amount;
-        CheckAchievements();
+        //CheckAchievements();
     }
 
     public void RemoveGold(int amount)
@@ -126,7 +125,7 @@ public class Player
         if (amount <= 0)
             return;
         this.woodAmount += amount;
-        CheckAchievements();
+        //CheckAchievements();
     }
 
     // Prida kamene
@@ -135,14 +134,14 @@ public class Player
         if (amount <= 0)
             return;
         this.stoneAmount += amount;
-        CheckAchievements();
+        //CheckAchievements();
     }
 
     // Prida xp
     public void AddXp(int amount)
     {
         this.levelHandler.AddXp(amount);
-        CheckAchievements();
+        //CheckAchievements();
     }
 
     public int NumberOfBuildings
@@ -156,6 +155,7 @@ public class Player
         AddWood(wood);
         AddXp(xp);
     }
+
 
 
     private void CheckAchievements(Building building)

@@ -15,6 +15,7 @@ public class AchievementsShow : MonoBehaviour
     public Color lockedDescriptionColor;
     public Color unlockedColor;
 
+    public Transform parentObject;
     
 
 
@@ -33,7 +34,7 @@ public class AchievementsShow : MonoBehaviour
 
     private void GenerateAchievementHolder(Achievement achievement)
     {
-        GameObject obj = Instantiate(prefab, transform);
+        GameObject obj = Instantiate(prefab, parentObject);
         Text nameText = obj.GetComponentInChildren<NameTextScript>().GetComponent<Text>();
         Text descriptionText = obj.GetComponentInChildren<DescriptionTextScript>().GetComponent<Text>();
         Image icon = obj.GetComponentInChildren<ImageTextScript>().GetComponent<Image>();
@@ -81,6 +82,20 @@ public class AchievementsShow : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Achievements: ");
+            foreach (Achievement achievement in this.holders.Keys)
+            {
+
+                Debug.Log(achievement.name);
+                //CheckAchievement(achievement);
+            }
+        }
+    }
+
     private Sprite GetImage(Achievement achiev)
     {
         if (!achiev.IsCompleted())
@@ -102,6 +117,14 @@ public class AchievementsShow : MonoBehaviour
     IEnumerator LateStart(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CheckAllAchievements();
+        /*foreach (Achievement achievement in playerManager.player.achievements.GetAchievements())
+        {
+            GenerateAchievementHolder(achievement);
+        }*/
+    }
+
+    public override string ToString()
+    {
+        return "bitch";
     }
 }

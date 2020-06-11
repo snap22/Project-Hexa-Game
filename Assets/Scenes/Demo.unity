@@ -2297,6 +2297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 758912153}
+  - component: {fileID: 758912154}
   m_Layer: 5
   m_Name: Switchable Panels
   m_TagString: Untagged
@@ -2326,6 +2327,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &758912154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758912152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0f186c47993aa41b34fd42ab93a905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 1808105347}
+  prefab: {fileID: 7694072210467699065, guid: f3251dfdcfeaaa34aac325265577759b, type: 3}
+  images:
+  - {fileID: 21300000, guid: f132df1f98351f345944af8c4c6d3dfa, type: 3}
+  - {fileID: 21300000, guid: 2f5519c9786692847ba5023d08bb853b, type: 3}
+  - {fileID: 21300000, guid: 2658564e02736b44f95b66432f246419, type: 3}
+  - {fileID: 21300000, guid: 6ff96aae11f0bff4f9e9d936f51913ce, type: 3}
+  lockedNameColor: {r: 0.17254902, g: 0.24313726, b: 0.3137255, a: 1}
+  lockedDescriptionColor: {r: 0.49803922, g: 0.54901963, b: 0.5529412, a: 1}
+  unlockedColor: {r: 0.9254902, g: 0.9411765, b: 0.94509804, a: 1}
+  parentObject: {fileID: 1804285935}
 --- !u!1 &972874582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,8 +4007,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1750.8}
-  m_SizeDelta: {x: 200, y: 3501.6}
+  m_AnchoredPosition: {x: 0, y: -957.5}
+  m_SizeDelta: {x: 200, y: 1915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804285936
 MonoBehaviour:
@@ -3993,7 +4017,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804285934}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed0f186c47993aa41b34fd42ab93a905, type: 3}
   m_Name: 
@@ -4008,6 +4032,7 @@ MonoBehaviour:
   lockedNameColor: {r: 0.17254902, g: 0.24313726, b: 0.3137255, a: 1}
   lockedDescriptionColor: {r: 0.49803922, g: 0.54901963, b: 0.5529412, a: 1}
   unlockedColor: {r: 0.9254902, g: 0.9411765, b: 0.94509804, a: 1}
+  parentObject: {fileID: 0}
 --- !u!114 &1804285937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4021,7 +4046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
+    m_Left: 0
     m_Right: 0
     m_Top: 5
     m_Bottom: 0
@@ -4964,7 +4989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdf146deee684a4cb05ac96dd7a543c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAchi: {fileID: 1804285936}
+  showAchi: {fileID: 758912154}
   selectionPanel: {fileID: 708803294}
   toolScript: {fileID: 16189898}
   tileMap: {fileID: 2029749199}
@@ -5214,7 +5239,7 @@ PrefabInstance:
     - target: {fileID: 7694072210467699066, guid: f3251dfdcfeaaa34aac325265577759b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 105
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7694072210467699066, guid: f3251dfdcfeaaa34aac325265577759b,
         type: 3}

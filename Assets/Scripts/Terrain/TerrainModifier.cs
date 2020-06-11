@@ -46,6 +46,7 @@ public class TerrainModifier : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))    //left click        
         {
+            //Debug.Log(showAchi.ToString());
             if (EventSystem.current.IsPointerOverGameObject())  // ak je kliknute na UI tak nic nespravi
                 return;
 
@@ -59,14 +60,10 @@ public class TerrainModifier : MonoBehaviour
                 currentTool.Check(tilePos, tileMap);        // pozrie sa ci je vybraty tile "v poriadku" - ak nie hodi exception
 
 
-                try 
-                {
-                    currentTool.Manage(playerManager.player, currentBuilding, tilePos);
-                }//currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
-                catch (AchievementCompletedException)
-                {
-                    this.showAchi.CheckAllAchievements();
-                }
+                
+                currentTool.Manage(playerManager.player, currentBuilding, tilePos);
+                //currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
+                
 
                 currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
                 playerManager.UpdateResourcesText();
@@ -141,9 +138,13 @@ public class TerrainModifier : MonoBehaviour
 
     private void BuildAStarterHouseAtTheBeginning()
     {
+        
         this.SetTile("Starting House");
         this.currentTool.Draw(Vector3Int.zero, tileMap, this.currentTile);
-        playerManager.player.AddBuilding(this.currentBuilding, Vector3Int.zero);
+        
+        
+         playerManager.player.AddBuilding(this.currentBuilding, Vector3Int.zero);
+        
 
         // resetne naspäť
         this.currentBuilding = null;

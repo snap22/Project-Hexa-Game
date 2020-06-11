@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class BuiltBuildings : Achievement
 {
-    private int current;
+    private int lastChecked;
 
     public BuiltBuildings(string name, int requiredAmount, AchievType type) : base(name, requiredAmount, type)
     {
-        this.current = 0;
+        this.lastChecked = 0;
     }
 
     public override void Check(Building building)
     {
-        if (this.IsCompleted())
+        /*if (this.IsCompleted())
             return;
 
         if (building == null)
             return;
 
-        this.current++;
-        if (this.current >= this.Required)
+        this.lastChecked++;
+        if (this.lastChecked >= this.Required)
             this.Complete();
-            
+            */
 
     }
 
     public override void Check(Player player)
     {
+        if (this.IsCompleted())
+            return;
 
+        int newAmount = player.NumberOfBuildings;
+        if (newAmount <= this.lastChecked)
+        {
+            return;
+        }
+
+        this.lastChecked = newAmount;
+        if (this.lastChecked >= this.Required)
+            this.Complete();
     }
 
     
