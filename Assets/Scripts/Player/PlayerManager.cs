@@ -28,6 +28,12 @@ public class PlayerManager : MonoBehaviour
             player.UpdateBuildings();
             UpdateResourcesText();
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("Current Buildings: ");
+            player.buildings.Test();
+        }
     }
 
     public void UpdateResourcesText()

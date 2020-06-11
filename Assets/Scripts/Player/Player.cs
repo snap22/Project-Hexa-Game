@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player
 {
     public PlayerBuildings buildings { get; private set; }
+    public AchievementsHolder achievements { get; private set; }
     public LevelHandler levelHandler { get; private set; }
 
     public int goldAmount { get; private set; }
@@ -13,7 +14,10 @@ public class Player
 
 
     private string removingInfo;
-
+    public int Level
+    {
+        get { return this.levelHandler.level; }
+    }
     public Player()
     {
         buildings = new PlayerBuildings(this);
@@ -23,6 +27,7 @@ public class Player
         this.stoneAmount = 5000;
 
         this.levelHandler = new LevelHandler(10, 10);
+        this.achievements = new AchievementsHolder();
     }
 
     
@@ -52,8 +57,10 @@ public class Player
         }
 
         Debug.Log("Adding " +  building.ToString());
+        CheckAchievements(building);
     }
 
+    
 
     //Vymaze budovu a vrati hracovi tretinu ceny budovy, a polovicu dreva a kamenov ktore vynalozil na kupu budovy 
     public void RemoveBuilding(Vector3Int position)
@@ -74,6 +81,8 @@ public class Player
         Debug.Log("Removing " + building.ToString());
 
         removingInfo = string.Format("  + {0} gold \n   + {1} wood \n   + {2} stone", removedGold, removedWood, removedStone);
+
+        
     }
 
     public string GetRemovingInfo()
@@ -97,6 +106,7 @@ public class Player
         if (amount <= 0)
             return;
         this.goldAmount += amount;
+        CheckAchievements();
     }
 
     public void RemoveGold(int amount)
@@ -115,7 +125,8 @@ public class Player
     {
         if (amount <= 0)
             return;
-        this.woodAmount += amount; 
+        this.woodAmount += amount;
+        CheckAchievements();
     }
 
     // Prida kamene
@@ -124,14 +135,20 @@ public class Player
         if (amount <= 0)
             return;
         this.stoneAmount += amount;
+        CheckAchievements();
     }
 
     // Prida xp
     public void AddXp(int amount)
     {
         this.levelHandler.AddXp(amount);
+        CheckAchievements();
     }
 
+    public int NumberOfBuildings
+    {
+         get { return this.buildings.Count; }
+    }
     public void AddResources(int gold, int stone, int wood, int xp = 0)
     {
         AddGold(gold);
@@ -140,6 +157,24 @@ public class Player
         AddXp(xp);
     }
 
-    
-    
+
+    private void CheckAchievements(Building building)
+    {
+        /*try
+        {
+            this.achievements.Check(this, building);
+        }
+        catch (AchievementCompletedException)
+        {
+            Debug.Log("Completed achievement.");
+
+        }*/
+
+        this.achievements.Check(this, building);
+    }
+
+    private void CheckAchievements()
+    {
+        this.CheckAchievements(null);
+    }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class TerrainModifier : MonoBehaviour
 {
+    public AchievementsShow showAchi;
     public GameObject selectionPanel;
     public ToolButtonScript toolScript;
     public Tilemap tileMap;
@@ -57,8 +58,16 @@ public class TerrainModifier : MonoBehaviour
 
                 currentTool.Check(tilePos, tileMap);        // pozrie sa ci je vybraty tile "v poriadku" - ak nie hodi exception
 
-                
-                currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
+
+                try 
+                {
+                    currentTool.Manage(playerManager.player, currentBuilding, tilePos);
+                }//currentTool.Manage(playerManager.player, currentBuilding, tilePos);      //skusi spravit akciu s hracom, ak sa vyskytne problem hodi sa exception
+                catch (AchievementCompletedException)
+                {
+                    this.showAchi.CheckAllAchievements();
+                }
+
                 currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
                 playerManager.UpdateResourcesText();
                 currentTool.ShowAnimation(spawner, pos);
@@ -103,6 +112,8 @@ public class TerrainModifier : MonoBehaviour
                 //Debug.Log("Not enough wood");
                 spawner.SetErrorText(pos, "Not enough wood");
             }
+            
+            
             
 
         }

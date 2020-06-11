@@ -55,8 +55,6 @@ public class PlayerBuildings
 
     public void UpdateBuildings()
     {
-
-
         foreach (Building building in buildings.Values)
             building.DoStuff(this.player);
     }
@@ -69,5 +67,16 @@ public class PlayerBuildings
         return buildings[position];
     }
 
+
+    public void Test()
+    {
+        foreach (Building building in buildings.Values)
+            Debug.Log(building);
+        Debug.Log("Number of buildings: " + buildings.Count);
+    }
     
+    public int Count
+    {
+        get { return this.buildings.Count; }
+    }
 }
