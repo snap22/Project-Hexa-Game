@@ -36,6 +36,8 @@ public class Player
     public void AddBuilding(Building building, Vector3Int position)
     {
         this.buildings.Add(building, position);
+        
+
         if (this.goldAmount < building.goldCost)
             throw new NoMoneyException();
         if (this.stoneAmount < building.stoneCost)
@@ -56,7 +58,10 @@ public class Player
             Debug.Log("Leveled up!");
         }
 
-        
+
+        if (building.name == "Starting House")
+            return;
+        this.CheckAchievements(building);
     }
 
     
@@ -105,7 +110,7 @@ public class Player
         if (amount <= 0)
             return;
         this.goldAmount += amount;
-        //CheckAchievements();
+        CheckAchievements();
     }
 
     public void RemoveGold(int amount)
@@ -125,7 +130,7 @@ public class Player
         if (amount <= 0)
             return;
         this.woodAmount += amount;
-        //CheckAchievements();
+        CheckAchievements();
     }
 
     // Prida kamene
@@ -134,14 +139,14 @@ public class Player
         if (amount <= 0)
             return;
         this.stoneAmount += amount;
-        //CheckAchievements();
+        CheckAchievements();
     }
 
     // Prida xp
     public void AddXp(int amount)
     {
         this.levelHandler.AddXp(amount);
-        //CheckAchievements();
+        CheckAchievements();
     }
 
     public int NumberOfBuildings

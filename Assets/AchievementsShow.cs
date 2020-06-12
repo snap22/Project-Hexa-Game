@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class AchievementsShow : MonoBehaviour
 {
+    public static AchievementsShow Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
+
     public PlayerManager playerManager;
     public GameObject prefab;
 
@@ -29,7 +35,7 @@ public class AchievementsShow : MonoBehaviour
             GenerateAchievementHolder(achievement);
         }
 
-        StartCoroutine(LateStart(1f));
+        //StartCoroutine(LateStart(1f));
     }
 
     private void GenerateAchievementHolder(Achievement achievement)
@@ -63,11 +69,19 @@ public class AchievementsShow : MonoBehaviour
             if (achievement == null)
                 continue;
 
-            CheckAchievement(achievement);
+            Unlock(achievement);
         }
     }
 
-    private void CheckAchievement(Achievement achievement)
+    public void UnlockCompleted(List<Achievement> achievs)
+    {
+        for (int i = 0; i < achievs.Count; i++)
+        {
+            Unlock(achievs[i]);
+        }
+    }
+
+    private void Unlock(Achievement achievement)
     {
         if (!achievement.IsCompleted())
             return;
