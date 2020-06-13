@@ -6,6 +6,8 @@ using UnityEngine;
 public class AchievementsHolder
 {
     public static event Action<Achievement> OnAchievementCompleted;
+    public static event Action<IAnnouncable> OnAnnouncement;
+
 
 
     private List<Achievement> achievements;
@@ -76,7 +78,7 @@ public class AchievementsHolder
         
         for (int i = 0; i < achievements.Count; i++)
         {
-            if (achievements[i].IsCompleted())
+            if (achievements[i].IsCompleted())      //preskoci ak je uz achievement splneny
                 continue;
 
             try
@@ -84,12 +86,13 @@ public class AchievementsHolder
                 this.achievements[i].Check(player);
                 this.achievements[i].Check(building);
             }
-            catch(AchievementCompletedException)
+            catch(AchievementCompletedException)    //ak sa splnil achievement, posle sa action
             {
                 
                 if (OnAchievementCompleted != null)
                 {
                     OnAchievementCompleted(this.achievements[i]);
+                    OnAnnouncement(this.achievements[i]);
                 }
             }
             

@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player
+public class Player : IAnnouncable
 {
+    public static event Action<IAnnouncable> OnAnnouncement;
+
     public PlayerBuildings buildings { get; private set; }
     public AchievementsHolder achievements { get; private set; }
     public LevelHandler levelHandler { get; private set; }
@@ -55,7 +58,7 @@ public class Player
         }
         catch (LevelUpException)
         {
-            Debug.Log("Leveled up!");
+            OnAnnouncement(this);
         }
 
 
@@ -181,5 +184,17 @@ public class Player
     private void CheckAchievements()
     {
         this.CheckAchievements(null);
+    }
+
+    // pre announcementy..
+
+    public string GetAnnouncementName()
+    {
+        return "Level up";
+    }
+
+    public string GetAnnouncementDescription()
+    {
+        return string.Format("Reached level {0}", this.Level);
     }
 }

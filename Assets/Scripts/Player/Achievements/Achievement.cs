@@ -1,8 +1,7 @@
 ﻿
 
-public abstract class Achievement
+public abstract class Achievement : IAnnouncable
 {
-
 
     private bool completed;
     private AchievType type;
@@ -42,5 +41,13 @@ public abstract class Achievement
     public abstract void Check(Building building);
     public abstract void Check(Player player);
 
-    
+    public string GetAnnouncementName()
+    {
+        return "Achievement unlocked";
+    }
+
+    public string GetAnnouncementDescription()
+    {
+        return this.name;
+    }
 }

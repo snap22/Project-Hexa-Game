@@ -22,7 +22,8 @@ public class AchievementsShow : MonoBehaviour
     public Color unlockedColor;
 
     public Transform parentObject;
-    
+
+    public Announcement announcement;
 
 
     private Dictionary<Achievement, GameObject> holders;
@@ -103,9 +104,11 @@ public class AchievementsShow : MonoBehaviour
         obj.GetComponentInChildren<DescriptionTextScript>().GetComponent<Text>().color = unlockedColor;
         obj.GetComponentInChildren<ImageTextScript>().GetComponent<Image>().sprite = GetImage(achievement);
 
+        announcement.Call("Achievement unlocked", achievement.name);
+
     }
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -117,7 +120,7 @@ public class AchievementsShow : MonoBehaviour
                 //CheckAchievement(achievement);
             }
         }
-    }
+    }*/
 
     private Sprite GetImage(Achievement achiev)
     {
@@ -146,8 +149,5 @@ public class AchievementsShow : MonoBehaviour
         }*/
     }
 
-    public override string ToString()
-    {
-        return "bitch";
-    }
+    
 }
