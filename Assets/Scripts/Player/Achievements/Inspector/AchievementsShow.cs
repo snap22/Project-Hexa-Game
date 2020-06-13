@@ -28,12 +28,15 @@ public class AchievementsShow : MonoBehaviour
     private Dictionary<Achievement, GameObject> holders;
     void Start()
     {
+        AchievementsHolder.OnAchievementCompleted += Unlock;
         holders = new Dictionary<Achievement, GameObject>();
 
         foreach (Achievement achievement in playerManager.player.achievements.GetAchievements())
         {
             GenerateAchievementHolder(achievement);
         }
+
+
 
         //StartCoroutine(LateStart(1f));
     }
@@ -79,6 +82,12 @@ public class AchievementsShow : MonoBehaviour
         {
             Unlock(achievs[i]);
         }
+    }
+
+    public void UnlockCompleted(Achievement achiev)
+    {
+        Unlock(achiev);
+        Debug.Log("Called to unlock for: " + achiev.name);
     }
 
     private void Unlock(Achievement achievement)

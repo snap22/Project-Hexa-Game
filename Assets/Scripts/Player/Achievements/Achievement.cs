@@ -2,6 +2,8 @@
 
 public abstract class Achievement
 {
+
+
     private bool completed;
     private AchievType type;
     private int requiredAmount;

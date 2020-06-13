@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class AchievementsHolder
 {
-    AchievementsShow show;
+    public static event Action<Achievement> OnAchievementCompleted;
+
 
     private List<Achievement> achievements;
 
     public AchievementsHolder()
     {
-        this.show = AchievementsShow.Instance;
         this.achievements = new List<Achievement>();
         
 
@@ -72,8 +72,7 @@ public class AchievementsHolder
 
     public void Check(Player player, Building building)
     {
-        List<Achievement>  completed = new List<Achievement>();
-        //List<int> toRemove = new List<int>();
+        //List<Achievement>  completed = new List<Achievement>();
         
         for (int i = 0; i < achievements.Count; i++)
         {
@@ -87,20 +86,15 @@ public class AchievementsHolder
             }
             catch(AchievementCompletedException)
             {
-                completed.Add(achievements[i]);
-                Debug.Log(string.Format("Completed the achievement: {0}", achievements[i].name));
-                //toRemove.Add(i);
+                
+                if (OnAchievementCompleted != null)
+                {
+                    OnAchievementCompleted(this.achievements[i]);
+                }
             }
             
         }
 
-        this.show.UnlockCompleted(completed);
-        
-
-        /*for (int i = 0; i < toRemove.Count; i++)
-        {
-            this.achievements.RemoveAt(i);
-        }*/
         
     }
 
