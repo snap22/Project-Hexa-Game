@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : IAnnouncable
 {
     public static event Action<IAnnouncable> OnAnnouncement;
+    public static event Action<Player> OnPanelUpgrade;
 
     public PlayerBuildings buildings { get; private set; }
     public AchievementsHolder achievements { get; private set; }
@@ -14,6 +15,8 @@ public class Player : IAnnouncable
     public int goldAmount { get; private set; }
     public int woodAmount { get; private set; }
     public int stoneAmount { get; private set; }
+    public int totalBuilt { get; private set; }
+    public int totalRemoved { get; private set; }
 
 
     private string removingInfo;
@@ -31,6 +34,9 @@ public class Player : IAnnouncable
 
         this.levelHandler = new LevelHandler(10, 10);
         this.achievements = new AchievementsHolder();
+
+        this.totalBuilt = 0;
+        this.totalRemoved = 0;
     }
 
     
@@ -65,6 +71,8 @@ public class Player : IAnnouncable
         if (building.name == "Starting House")
             return;
         this.CheckAchievements(building);
+        this.totalBuilt++;
+        OnPanelUpgrade(this);
     }
 
     
@@ -85,11 +93,12 @@ public class Player : IAnnouncable
         this.stoneAmount += removedStone;
         this.woodAmount += removedWood;
 
-        Debug.Log("Removing " + building.ToString());
+        //Debug.Log("Removing " + building.ToString());
 
         removingInfo = string.Format("  + {0} gold \n   + {1} wood \n   + {2} stone", removedGold, removedWood, removedStone);
+        this.totalRemoved++;
+        OnPanelUpgrade(this);
 
-        
     }
 
     public string GetRemovingInfo()

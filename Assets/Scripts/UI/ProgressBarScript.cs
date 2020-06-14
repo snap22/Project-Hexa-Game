@@ -16,6 +16,11 @@ public class ProgressBarScript : MonoBehaviour
         minimum = 0;
     }
 
+    /*void Update()
+    {
+        GetCurrentFill();
+    }*/
+
     private void GetCurrentFill()
     {
         float currentOffset = current - minimum;

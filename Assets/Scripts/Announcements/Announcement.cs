@@ -27,6 +27,8 @@ public class Announcement : MonoBehaviour
         rect = GetComponent<RectTransform>();
         Player.OnAnnouncement += Call;
         AchievementsHolder.OnAnnouncement += Call;
+
+        Reset();
     }
     public void Call(string nameText, string descriptionText)
     {
@@ -53,7 +55,7 @@ public class Announcement : MonoBehaviour
         this.descriptionText.text = "";
         //LeanTween.textAlpha(rect, 0f, 2f).setEase(LeanTweenType.easeInCirc);
         LeanTween.color(rect, hiddenColor, 0.1f).setEase(LeanTweenType.easeInCirc);
-        Debug.Log("Reseting");
+        //Debug.Log("Reseting");
     }
 
     IEnumerator WaitAndReset(float delay)
