@@ -69,7 +69,11 @@ public class Player : IAnnouncable
 
 
         if (building.name == "Starting House")
+        {
+            OnPanelUpgrade(this);
             return;
+        }
+            
         this.CheckAchievements(building);
         this.totalBuilt++;
         OnPanelUpgrade(this);

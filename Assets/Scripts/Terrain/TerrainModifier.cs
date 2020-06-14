@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -41,7 +42,23 @@ public class TerrainModifier : MonoBehaviour
     void Update()
     {
         ClickAndDo();
+        CheckKeyboardShortcut();
+        
     }
+
+    // podla toho ktora klavesa bola stlacena nastavi tool
+    private void CheckKeyboardShortcut()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            this.SetTool(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            this.SetTool(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            this.SetTool(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            this.SetTool(3);
+    }
+
     private void ClickAndDo()
     {
         if (Input.GetMouseButtonDown(0))    //left click        

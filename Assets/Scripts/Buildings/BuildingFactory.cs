@@ -110,6 +110,9 @@ public class BuildingFactory : MonoBehaviour
                 break;
         }
 
+        if (blueprint.name == "Starting House")
+            xpReward = 0;
+
 
         switch (blueprint.type)
         {
