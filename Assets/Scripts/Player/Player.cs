@@ -73,6 +73,8 @@ public class Player : IAnnouncable
         this.CheckAchievements(building);
         this.totalBuilt++;
         OnPanelUpgrade(this);
+        //Debug.Log("Adding " + building.ToString());
+
     }
 
     
