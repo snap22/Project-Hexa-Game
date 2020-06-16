@@ -17,8 +17,7 @@ public class SelectionPanelScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            gameObject.SetActive(false);
+        
     }
 
 }

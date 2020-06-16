@@ -21,12 +21,14 @@ public class Announcement : MonoBehaviour
 
 
     private RectTransform rect;
+    private AudioManager audioManager;
     
     void Start()
     {
         rect = GetComponent<RectTransform>();
         Player.OnAnnouncement += Call;
         AchievementsHolder.OnAnnouncement += Call;
+        audioManager = AudioManager.Instance;
 
         Reset();
     }
@@ -35,7 +37,7 @@ public class Announcement : MonoBehaviour
         LeanTween.color(rect, normalColor, 0.1f);
         this.nameText.text = nameText;
         this.descriptionText.text = descriptionText;
-
+        PlaySound();
         StartCoroutine(WaitAndReset(1f));
 
     }
@@ -44,10 +46,12 @@ public class Announcement : MonoBehaviour
         LeanTween.color(rect, normalColor, 0.1f);
         this.nameText.text = announcement.GetAnnouncementName();
         this.descriptionText.text = announcement.GetAnnouncementDescription();
-
+        PlaySound();
         StartCoroutine(WaitAndReset(1f));
 
     }
+
+    private void PlaySound() => this.audioManager.PlaySoundEffect("Announcement");
 
     private void Reset()
     {

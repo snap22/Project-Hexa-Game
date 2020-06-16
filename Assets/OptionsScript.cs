@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class OptionsScript : MonoBehaviour
 {
@@ -31,13 +32,17 @@ public class OptionsScript : MonoBehaviour
     private bool wantFullScreen;
     private int selectedIndex;
 
+    public AudioSource soundMixer;
+    public AudioSource musicMixer;
+
     void Start()
     {
+        
         wantFullScreen = true;
         soundState = true;
         musicState = true;
-        currentSound = soundSlider.value;
-        currentMusic = musicSlider.value;
+        soundMixer.volume = soundSlider.value;
+        musicMixer.volume = musicSlider.value;
         // DROPDOWN PRE RESOLUTIONS
         int currentResolutionIndex = 0;
         List<string> options = new List<string>();
@@ -62,7 +67,16 @@ public class OptionsScript : MonoBehaviour
         SetupIcon(soundState, TheThing.Sound);
         //Debug.Log("Current sound: " + currentSound);
         if (soundState)
+        {
             soundSlider.value = 0.1f;
+            SetupVolume(0.1f, TheThing.Sound);
+        }
+        else
+        {
+            SetupVolume(0f, TheThing.Sound);
+        }
+            
+        
     }
 
     public void ToogleMusic()
@@ -70,12 +84,19 @@ public class OptionsScript : MonoBehaviour
         musicState = !musicState;
         SetupIcon(musicState, TheThing.Music);
         if (musicState)
+        {
             musicSlider.value = 0.1f;
+            SetupVolume(0.1f, TheThing.Music);
+        } else
+        {
+            SetupVolume(0f, TheThing.Music);
+        }
+            
     }
 
     public void ChangeSound(float newValue)
     {
-       
+        SetupVolume(newValue, TheThing.Sound);
         //currentSound = newValue;
         if (newValue <= 0)
         {
@@ -94,7 +115,7 @@ public class OptionsScript : MonoBehaviour
 
     public void ChangeMusic(float newValue)
     {
-        
+        SetupVolume(newValue, TheThing.Music);
         //currentMusic = newValue;
         if (newValue <= 0)
         {
@@ -140,6 +161,19 @@ public class OptionsScript : MonoBehaviour
                     musicImg.sprite = musicOff;
                     musicSlider.value = 0;
                 }
+                break;
+        }
+    }
+
+    private void SetupVolume(float newValue, TheThing thing)
+    {
+        switch (thing)
+        {
+            case TheThing.Sound:
+                soundMixer.volume = newValue;
+                break;
+            case TheThing.Music:
+                musicMixer.volume = newValue;
                 break;
         }
     }
