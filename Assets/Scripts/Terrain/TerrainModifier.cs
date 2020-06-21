@@ -29,6 +29,9 @@ public class TerrainModifier : MonoBehaviour
     private Building currentBuilding;
 
     private BuildingFactory factory;
+    private int currentSoundIndex;
+
+    private AudioManager sound;
 
     void Start()
     {
@@ -37,6 +40,8 @@ public class TerrainModifier : MonoBehaviour
         this.tools = new ToolManager(lockedTileMap, selectionPanel);
 
         this.BuildAStarterHouseAtTheBeginning();
+
+        this.sound = AudioManager.Instance;
     }
 
     void Update()
@@ -85,6 +90,7 @@ public class TerrainModifier : MonoBehaviour
                 currentTool.Draw(tilePos, tileMap, currentTile);        //vykona akciu aku treba
                 playerManager.UpdateResourcesText();
                 currentTool.ShowAnimation(spawner, pos);
+                this.sound.PlayToolSoundEffect(this.currentSoundIndex + 1);
                 
             }
             catch (OccupiedTileException)
@@ -149,6 +155,7 @@ public class TerrainModifier : MonoBehaviour
     {
         this.currentTool = this.tools.GetTool(index);
         toolScript.SetButtonActive(index);
+        this.currentSoundIndex = index;
     }
 
 

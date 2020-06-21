@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource soundSource;
     public AudioSource musicSource;
+    public AudioSource toolSource;
 
  
 
@@ -39,5 +40,13 @@ public class AudioManager : MonoBehaviour
             return;
         soundSource.clip = sounds[index].sound;
         soundSource.Play();
+    }
+
+    public void PlayToolSoundEffect(int index)
+    {
+        if (index < 0 || index >= sounds.Length)
+            return;
+        toolSource.clip = sounds[index].sound;
+        toolSource.Play();
     }
 }
