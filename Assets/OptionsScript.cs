@@ -34,6 +34,7 @@ public class OptionsScript : MonoBehaviour
 
     public AudioSource soundMixer;
     public AudioSource musicMixer;
+    public AudioSource toolsMixer;
 
     void Start()
     {
@@ -42,7 +43,11 @@ public class OptionsScript : MonoBehaviour
         soundState = true;
         musicState = true;
         soundMixer.volume = soundSlider.value;
+        toolsMixer.volume = soundSlider.value;
+
         musicMixer.volume = musicSlider.value;
+        
+
         // DROPDOWN PRE RESOLUTIONS
         int currentResolutionIndex = 0;
         List<string> options = new List<string>();
@@ -171,6 +176,7 @@ public class OptionsScript : MonoBehaviour
         {
             case TheThing.Sound:
                 soundMixer.volume = newValue;
+                toolsMixer.volume = newValue;
                 break;
             case TheThing.Music:
                 musicMixer.volume = newValue;

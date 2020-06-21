@@ -59,6 +59,16 @@ public class ProgressBarScript : MonoBehaviour
             return;
 
         this.current += amount;
+        if (current > maximum)
+            current = 0;
+        this.GetCurrentFill();
+
+
+    }
+
+    public void Reset()
+    {
+        this.current = 0;
         this.GetCurrentFill();
     }
 
@@ -68,4 +78,7 @@ public class ProgressBarScript : MonoBehaviour
         this.maximum = max;
         this.GetCurrentFill();
     }
+
+
+    
 }

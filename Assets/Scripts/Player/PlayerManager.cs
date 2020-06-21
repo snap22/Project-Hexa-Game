@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (Input.GetKey(KeyCode.Space))
         {
@@ -34,12 +34,18 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Current Buildings: ");
             player.buildings.Test();
         }
-    }
+    }*/
 
     public void UpdateResourcesText()
     {
         goldText.text = player.goldAmount.ToString();
         woodText.text = player.woodAmount.ToString();
         stoneText.text = player.stoneAmount.ToString();
+    }
+
+    public void Turn()
+    {
+        player.UpdateBuildings();
+        UpdateResourcesText();
     }
 }
