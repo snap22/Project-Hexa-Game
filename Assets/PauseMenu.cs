@@ -32,12 +32,12 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        //quit game
+        Application.Quit();
     }
 
     public void BackToMenu()
     {
-        //return to menu
+        SceneManager.LoadScene(0);
     }
 
     void OnDisable()

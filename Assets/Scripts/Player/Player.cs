@@ -28,9 +28,9 @@ public class Player : IAnnouncable
     {
         buildings = new PlayerBuildings(this);
 
-        this.goldAmount = 5000;
-        this.woodAmount = 5000;
-        this.stoneAmount = 5000;
+        this.goldAmount = 100;
+        this.woodAmount = 100;
+        this.stoneAmount = 100;
 
         this.levelHandler = new LevelHandler(10, 10);
         this.achievements = new AchievementsHolder();
@@ -183,16 +183,6 @@ public class Player : IAnnouncable
 
     private void CheckAchievements(Building building)
     {
-        /*try
-        {
-            this.achievements.Check(this, building);
-        }
-        catch (AchievementCompletedException)
-        {
-            Debug.Log("Completed achievement.");
-
-        }*/
-
         this.achievements.Check(this, building);
     }
 
