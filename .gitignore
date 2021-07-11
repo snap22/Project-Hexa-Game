@@ -63,3 +63,7 @@ crashlytics-build.properties
 
 #music
 *.ogg
+
+
+#final builds
+*.rar
